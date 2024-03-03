@@ -32,6 +32,7 @@ const validateData = (req, res, next) => {
   next()
 }
 
+// First Page You After Running The App
 app.get('/', function (req, res) {
   res.send('Hello World!')
 })
@@ -51,6 +52,8 @@ app.get('/', function (req, res) {
 //   })
 // })
 
+
+// GET Operation is used to view the all tasks in the tasks.js file
 // http://localhost:3000/tasks?page=1&limit=1
 app.get('/tasks', (req, res) => {
   const page = parseInt(req.query.page) || 1
@@ -73,6 +76,7 @@ app.get('/tasks', (req, res) => {
   })
 })
 
+// GET Operation is used to view the task with a specific id
 // http://localhost:3000/tasks/PbE4Vym
 app.get('/tasks/:id', (req, res) => {
   const { id } = req.params
@@ -89,6 +93,7 @@ app.get('/tasks/:id', (req, res) => {
   }
 })
 
+// POST Operation is used to add a new task into the file
 app.post('/tasks', validateData, (req, res) => {
   tasks[`${generateId(7)}`] = {
     title: req.body.title,
@@ -102,6 +107,7 @@ app.post('/tasks', validateData, (req, res) => {
     response: 'Task is added',
   })
 })
+
 
 // PUT operation to update data
 app.put('/tasks/:id', validateData, (req, res) => {
@@ -117,6 +123,7 @@ app.put('/tasks/:id', validateData, (req, res) => {
 })
 
 // DELETE operation to delete data
+// http://localhost:3000/tasks/PbE4Vym
 app.delete('/tasks/:id', (req, res) => {
   const { id } = req.params
   if (!(id in tasks)) {
@@ -134,6 +141,8 @@ app.delete('/tasks/:id', (req, res) => {
   }
 })
 
+
+// This function is used to continously listen to the port
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
 })
