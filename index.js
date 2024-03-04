@@ -4,6 +4,7 @@ app.use(express.json())
 const moment = require('moment')
 const fs = require('fs')
 var tasks = require('./tasks.js')
+const PORT = 3000;
 
 // writeFile Function Write The Array on File
 const writeFile = () => {
@@ -53,7 +54,7 @@ app.get('/', function (req, res) {
 // })
 
 
-// GET Operation is used to view the all tasks in the tasks.js file
+// GET Operation with Pagination is used to view the tasks with page and limit in the tasks.js file with 
 // http://localhost:3000/tasks?page=1&limit=1
 app.get('/tasks', (req, res) => {
   const page = parseInt(req.query.page) || 1
@@ -143,6 +144,6 @@ app.delete('/tasks/:id', (req, res) => {
 
 
 // This function is used to continously listen to the port
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
+app.listen(PORT, function () {
+  console.log(`Hosting Server on http://localhost:${PORT}/`)
 })
